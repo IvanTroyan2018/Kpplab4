@@ -1,0 +1,18 @@
+extends layout
+
+block main
+    a(href='/suggestions') Назад
+
+    h1=suggestion.title
+
+    h2 Вподобали:
+
+    ul
+        for voter in [...suggestion.voters]
+            li=voter
+
+    form(method='post')
+        if suggestion.voters.has(username)
+            button(type='submit') Відмінити
+        else
+            button(type='submit') Вибрати

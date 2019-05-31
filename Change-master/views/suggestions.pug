@@ -1,0 +1,20 @@
+extends layout
+
+block main
+    h1 Пропозиції:
+
+    ul
+        for suggestion in suggestions
+            li
+                a(href=`/suggestions/${suggestion.id}`)=suggestion.title
+                |  (#{suggestion.voters.size})
+
+                form(method='post' action=`/suggestions/${suggestion.id}`)
+                    if suggestion.voters.has(username)
+                        button(type='submit') Відмінити
+                    else
+                        button(type='submit') Вибрати
+
+    form(method='post')
+        input(type='text' name='title' placeholder='Назва пропозиції')
+        button(type='submit') Запропунувати
